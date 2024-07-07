@@ -10,8 +10,17 @@
         <h3 class="align-self-end text-danger">{% if task.done == False %}Not done{% else %} Done {% endif %}</h3>
       </div>
       <div class="float-right mr-3">
-        <a class="btn btn-primary" href="#">Update</a>
+        <form method="post" action="{% url 'task:task_list' %}">
+          {% csrf_token %}
+          <input type="hidden" name="task_id" value="{{ task.id }}">
+          {% if task.done == False %}
+            <button type="submit" class="btn btn-success ml-2">Complete</button>
+          {% else %}
+            <button type="submit" class="btn btn-secondary ml-2">Undo</button>
+          {% endif %}
+        </form>
       </div>
+
       <p>Created: {{ task.created_at }} {% if task.deadline %}Deadline: {{ task.deadline }}{% else %}{% endif %}</p>
       <p class="text-muted font-italic">
         Tags:
@@ -19,6 +28,11 @@
           {{ tag.name }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
       </p>
+      <div>
+        <a href="{% url 'task:task_update' pk=task.pk %}">Update</a>
+        <a href="{% url 'task:task_delete' pk=task.pk %}">Delete</a>
+      </div>
+
       <hr>
     {% endfor %}
   </div>
