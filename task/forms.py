@@ -3,7 +3,7 @@ from django import forms
 from task.models import Task, Tag
 
 
-class TaskCreateForm(forms.ModelForm):
+class TaskCreateUpdateForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple,
