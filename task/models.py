@@ -17,3 +17,6 @@ class Task(models.Model):
 
     def __str__(self):
         return f"{self.content}, tags - {', '.join([tag.name for tag in self.tags.all()])} - deadline: {self.deadline}"
+
+    class Meta:
+        ordering = ["done", "created_at"]
