@@ -8,6 +8,7 @@ from task.models import Task, Tag
 
 class TaskListView(generic.ListView):
     model = Task
+    queryset = Task.objects.all().prefetch_related('tags')
     template_name = "task/task_list.html"
     context_object_name = "task_list"
 
