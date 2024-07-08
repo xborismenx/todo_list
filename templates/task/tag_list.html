@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex align-items-center">
+    <h1 class="flex-grow-1">Tag List</h1>
+    <a class="btn btn-primary" href="{% url 'task:tag_create' %}">Create</a>
+  </div>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    {% for tag in tag_list %}
+      <tr>
+        <td><strong>{{ tag.name }}</strong></td>
+        <td><a href={% url 'task:tag_update' pk=tag.pk %}>Update</a></td>
+        <td><a href={% url 'task:tag_delete' pk=tag.pk %}>Delete</a></td>
+      </tr>
+    {% endfor %}
+
+    </table>
+{% endblock %}
+
